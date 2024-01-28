@@ -21,14 +21,12 @@ app.get('/', (req, res) => {
 
 app.get('/users', (req, res) => {
     console.log(chalk.blueBright('Users page'));
-    res.send('Users page');
-    res.end();
+    res.render('users', { title: 'Users'});
 })
 
 app.get('/about', (req, res) => {
     console.log(chalk.blueBright('About page'));
-    res.send('<p>HHHHGHHHHHH</p>');
-    res.end();
+    res.render('about', { title: 'About'});
 })
 
 app.use((req , res, next) =>{
