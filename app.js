@@ -2,7 +2,6 @@ const chalk = require('chalk');
 const express = require('express');
 const app = express();
 const PORT = 8080;
-const chalk = require('chalk');
 
 app.get('/', (req, res) => {
         console.log(chalk.blueBright('HomePage'));
