@@ -1,5 +1,10 @@
 {{>header}}
-<h1>This is HomePage</h1>
+<h1>{{title}}</h1>
 
+  {{#each users}}
+      <ul>
+    <li>firstName: {{this.firstName}}, userName: {{this.userName}}, email: {{this.email}}</li>
+      </ul>
+    {{/each}} 
 
 {{>footer}}
