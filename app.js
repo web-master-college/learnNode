@@ -4,6 +4,8 @@ const app = express();
 const PORT = 8080;
 const path = require('path');
 const hbs = require('hbs');
+const productRouter = require('./routes/product');
+
 
 const Users = [];
 
@@ -18,6 +20,8 @@ app.use((request, response, next) =>{
     next();
 })
 
+app.use('/products', productRouter);
+
 app.get('/', (req, response) => {
     response.render('home', {
         title: 'HomePage All Users',
@@ -30,13 +34,34 @@ app.get('/register', (req, response) => {
 });
 
 // new data sent to user
-app.post('/new-user', (request, response) => {
-    const {firstName, userName, email, password} = request.body;
-    Users.push({firstName, userName, email, password});
-    response.render('home', {
-        title: 'HomePage All Users',
-        users: Users
-    }); 
+///   user/333   /user/2345
+app.get('/user/:userId', (request, response) => {
+
+        const userId = parseInt(request.params.userId);
+        const userIndex = Users.findIndex(user => user.id === userId);
+        if(userIndex > -1){
+            const {firstName, userName, email} = Users[userIndex];
+            response.render('singleUser', {
+                firstName, userName, email
+            })
+        }else{
+            response.render('404');
+        }
+        
+
+})
+
+app.get('/new-user', (request, response) => {
+    
+    const {firstName, userName, email, password} = request.query;
+    console.log({firstName, userName, email, password})
+    //const {firstName, userName, email, password} = request.body;
+    Users.push({firstName, userName, email, password, id: Users.length + 1});
+    response.redirect('/');
+    // response.render('home', {
+    //     title: 'HomePage All Users',
+    //     users: Users
+    // }); 
     console.log(Users);
 });
 
