@@ -5,15 +5,20 @@ const PORT = 8080;
 const path = require('path');
 const hbs = require('hbs');
 const productRouter = require('./routes/product');
+const bodyParser = require('body-parser');
+const db = require('./utils/database');
 
 
 const Users = [];
 
 app.set('view engine', 'hbs');
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,'public')));
 
 console.log(chalk.blueBright('Meshulami'));
 hbs.registerPartials(__dirname + '/views/partials');
+
+// START  ---> / --> middleware (console.log) --> get (path /) --> return resposnse --> END
 
 app.use((request, response, next) =>{
     console.log(chalk.blueBright(`Requested URL: ${request.url}`));
@@ -50,21 +55,23 @@ app.get('/user/:userId', (request, response) => {
         
 
 })
+// URL -> 
+// HEDARES
+// BODY
+// url encode -> url decode
 
-app.get('/new-user', (request, response) => {
+app.post('/new-user', (request, response) => {
     
-    const {firstName, userName, email, password} = request.query;
-    console.log({firstName, userName, email, password})
+    const {firstName, userName, email, password} = request.body;
+    console.log({firstName, userName, email, password});
     //const {firstName, userName, email, password} = request.body;
     Users.push({firstName, userName, email, password, id: Users.length + 1});
     response.redirect('/');
-    // response.render('home', {
-    //     title: 'HomePage All Users',
-    //     users: Users
-    // }); 
-    console.log(Users);
 });
 
+// products/234
+
+// -> name, price, id, descripion
 
 
 
@@ -83,6 +90,13 @@ app.use((req , res, next) =>{
 })
 
 
-app.listen(PORT, () =>{
-    console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}`));
+app.listen(PORT, async () =>{
+    try{
+        await db.authenticate();
+        console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Succssfully connected to Databsae`));
+    }catch(e){
+        console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Could not connected to Databsae`));
+    }
+
+    
 });
