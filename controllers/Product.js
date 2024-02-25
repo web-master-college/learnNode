@@ -4,5 +4,5 @@ exports.getProducts = (request , response) =>{
 }
 
 exports.singleProduct = (request , response) =>{
-    console.log('Signle Product');
+    response.render('products/product');
 }
