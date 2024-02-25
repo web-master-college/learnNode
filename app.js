@@ -7,7 +7,7 @@ const hbs = require('hbs');
 const productRouter = require('./routes/product');
 const bodyParser = require('body-parser');
 const db = require('./utils/database');
-
+const Product = require('./models/product');
 
 const Users = [];
 
@@ -39,6 +39,8 @@ app.get('/register', (req, response) => {
 });
 
 // new data sent to user
+//  product/10
+
 ///   user/333   /user/2345
 app.get('/user/:userId', (request, response) => {
 
@@ -91,12 +93,13 @@ app.use((req , res, next) =>{
 
 
 app.listen(PORT, async () =>{
-    try{
-        await db.authenticate();
-        console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Succssfully connected to Databsae`));
-    }catch(e){
-        console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Could not connected to Databsae`));
-    }
-
+        try{
+            await db.authenticate();
+            await Product.sync();
+            console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Succssfully connected to Databsae`));
+        }catch(e){
+            console.log(chalk.bgRedBright(`Server is running on Port ${PORT}, Could not connected to Databsae`));
+        }
     
+        
 });

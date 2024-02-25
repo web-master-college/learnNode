@@ -1,4 +1,4 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const {DataTypes} = require('sequelize');
 const sequelize = require('../utils/database');
 
 const Product = sequelize.define('Product', {
@@ -6,7 +6,7 @@ const Product = sequelize.define('Product', {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
-    primrayKey: true
+    primaryKey: true
   },
   name: {
     type: DataTypes.STRING
@@ -17,7 +17,7 @@ const Product = sequelize.define('Product', {
   description: {
     type: DataTypes.TEXT
   },
-  category: {
+  quantity: {
     type: DataTypes.INTEGER
   }
 }, {
