@@ -1,8 +1,22 @@
+const Product = require('../models/product');
 
-exports.getProducts = (request , response) =>{
+
+const getProducts = (request , response) =>{
     response.render('products/all', { title: 'Products'});
 }
 
-exports.singleProduct = (request , response) =>{
-    console.log('Signle Product');
+const singleProduct = async (request , response) =>{
+    const id = request.params.productId;
+    const product = await Product.findOne({where:{id: id}, raw: true});
+    if(product){
+        response.render('products/single', product);
+    }else{
+        response.render('404');
+    }
+    
+}
+
+module.exports ={
+    singleProduct,
+    getProducts
 }

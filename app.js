@@ -100,6 +100,9 @@ app.listen(PORT, async () =>{
         }catch(e){
             console.log(chalk.bgRedBright(`Server is running on Port ${PORT}, Could not connected to Databsae`));
         }
-    
-        
 });
+
+// db.sync()
+//     .then(() =>{
+//         console.log(chalk.bgYellowBright(`Models Succssfully created.`));
+//     });
