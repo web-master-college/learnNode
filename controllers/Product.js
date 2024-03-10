@@ -1,8 +1,25 @@
 const Product = require('../models/product');
+const sequelize = require('sequelize');
+const getRandomRating = () =>{
+        return Math.floor(Math.random() * 5);
+}
 
 
 const getProducts = (request , response) =>{
-    response.render('products/all', { title: 'Products'});
+
+    Product.findAll()
+            .then(products =>{
+                const ratedProducts = products.map(p => {
+                    p.rating = getRandomRating();
+                    return p;
+                })
+                response.render('products/all', {products: ratedProducts});
+
+            }).catch(err =>{
+                response.render('404');   
+            })
+
+
 }
 
 const singleProduct = async (request , response) =>{

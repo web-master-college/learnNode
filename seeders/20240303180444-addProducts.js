@@ -10,7 +10,7 @@ module.exports = {
      *
      * Example:
     */
-    // await queryInterface.bulkInsert('products', products, {});
+    await queryInterface.bulkInsert('products', products, {});
 
   },
 
@@ -21,5 +21,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+      await queryInterface.bulkDelete('products', null, {});
   }
 };
