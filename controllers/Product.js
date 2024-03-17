@@ -14,10 +14,15 @@ const search = async (request , response) =>{
         where:{
             name: {
                 [sequelize.Op.like]: `%${searchTerm}%`
-            }
+            },
         },
+        include: [{ model: ProductImages, required: false, attributes:['url'] }],
         raw: true
      })
+
+     products = products.map(p => {
+        return { url: p['ProductImages.url'], ...p};
+     });
 
     }
     response.render('products/search', {products, title: 'Search Products'});

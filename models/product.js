@@ -1,4 +1,5 @@
 const {DataTypes} = require('sequelize');
+const ProductImage = require('../models/productimages');
 const sequelize = require('../utils/database');
 
 const Product = sequelize.define('Product', {
@@ -21,7 +22,11 @@ const Product = sequelize.define('Product', {
     type: DataTypes.INTEGER
   }
 }, {
-  // Other model options go here
+
 });
+// One to Many
+Product.hasMany(ProductImage, {
+  foreignKey: 'productId'
+})
 
 module.exports = Product;
