@@ -1,9 +1,27 @@
 const Product = require('../models/product');
+const ProductImages = require('../models/productimages');
 const sequelize = require('sequelize');
 const getRandomRating = () =>{
         return Math.floor(Math.random() * 5);
 }
 
+const search = async (request , response) =>{
+    let products = [];
+    const searchTerm = request.query.q;
+    if(searchTerm !== undefined){
+        // search is active
+     products = await Product.findAll({
+        where:{
+            name: {
+                [sequelize.Op.like]: `%${searchTerm}%`
+            }
+        },
+        raw: true
+     })
+
+    }
+    response.render('products/search', {products, title: 'Search Products'});
+}
 
 const getProducts = (request , response) =>{
 
@@ -35,5 +53,6 @@ const singleProduct = async (request , response) =>{
 
 module.exports ={
     singleProduct,
-    getProducts
+    getProducts,
+    search
 }

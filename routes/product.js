@@ -7,8 +7,15 @@ const ProductConroller = require('../controllers/Product');
 
 
 //  -> /products
+router.get('/search', ProductConroller.search);
+
 router.get('/', ProductConroller.getProducts);
 
 router.get('/:productId', ProductConroller.singleProduct);
+
+
+
+// 
+
 
 module.exports = router;
