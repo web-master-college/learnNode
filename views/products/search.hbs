@@ -1,14 +1,20 @@
 {{>header}}
 <h1>{{title}}</h1>
 
-
-<div>All Products</div>
+<form method="GET">
+<div class="ui huge form">
+    <div class="field">
+      <input name="q" placeholder="Enter Product Name" type="text" />
+    </div>
+  <button class="ui submit button">Search</button>
+</div>
+</form>
 
 <div class="ui four cards">
   {{#each products}}
   <div class="card">
     <div class="image">
-      <img>
+      <img src="{{this.url}}" alt="{{this.name}}" />
     </div>
 <div class="content">
     <a class="header">{{this.name}}</a>
@@ -35,3 +41,4 @@
 
 
 {{>footer}}
+
