@@ -5,13 +5,22 @@ const PORT = 8080;
 const path = require('path');
 const hbs = require('hbs');
 const productRouter = require('./routes/product');
+const authRouter = require('./routes/auth');
 const bodyParser = require('body-parser');
 const db = require('./utils/database');
-const Product = require('./models/product');
-const ProductImage = require('./models/productimages');
-
+// const Product = require('./models/product');
+// const ProductImage = require('./models/productimages');
 
 const Users = [];
+
+hbs.registerHelper("getProductImage", function(product, options) {
+    if(product.ProductImages && product.ProductImages.length){
+        return `<img src="${product.ProductImages[0].url}" alt="${product.name}" />`
+    }
+    return '';
+
+});
+
 
 app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,6 +36,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 //     next();
 // })
 
+app.use(authRouter);
 app.use('/products', productRouter);
 
 app.get('/', (req, response) => {
@@ -96,6 +106,9 @@ app.use((req , res, next) =>{
 
 app.listen(PORT, async () =>{
         try{
+            
+            // await Product.sync();
+
             await db.authenticate();
             console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Succssfully connected to Databsae`));
         }catch(e){

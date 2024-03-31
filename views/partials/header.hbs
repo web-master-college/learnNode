@@ -10,7 +10,10 @@
 </head>
 <body>
 
-    <nav class="top-nav">
+{{#if hideMenu}}
+ 
+{{else}}
+   <nav class="top-nav">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/users">Users</a></li>
@@ -20,4 +23,7 @@
             <li><a href="/about">about</a></li>
         </ul>
     </nav>
+
+
+{{/if}}
     <div class="ui container">
