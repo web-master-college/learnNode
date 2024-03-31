@@ -5,10 +5,9 @@ const getRandomRating = () =>{
         return Math.floor(Math.random() * 5);
 }
 
-<<<<<<< HEAD
-exports.singleProduct = (request , response) =>{
+const singleProductTwo = (request , response) => {
     response.render('products/product');
-=======
+}
 const search = async (request , response) =>{
     let products = [];
     const searchTerm = request.query.q;
@@ -63,6 +62,6 @@ const singleProduct = async (request , response) =>{
 module.exports ={
     singleProduct,
     getProducts,
-    search
->>>>>>> ad5ac3065a00ffd12ab9a69e53cb318e1d8df0d4
+    search,
+    singleProductTwo
 }

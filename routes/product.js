@@ -11,7 +11,7 @@ router.get('/search', ProductConroller.search);
 
 router.get('/', ProductConroller.getProducts);
 
-router.get('/:productId', ProductConroller.singleProduct);
+router.get('/:productId', ProductConroller.singleProductTwo);
 
 
 
