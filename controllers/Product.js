@@ -5,9 +5,23 @@ const getRandomRating = () =>{
         return Math.floor(Math.random() * 5);
 }
 
+
+// products/singleDesign
 const singleProductTwo = (request , response) => {
     response.render('products/product');
 }
+
+const checkOut = (request , response) => {
+    response.render('products/checkout');
+}
+
+
+const showStore = (request , response) => {
+    response.render('products/store');
+}
+
+
+
 const search = async (request , response) =>{
     let products = [];
     const searchTerm = request.query.q;
@@ -56,12 +70,13 @@ const singleProduct = async (request , response) =>{
     }else{
         response.render('404');
     }
-    
 }
 
-module.exports ={
+module.exports = {
     singleProduct,
     getProducts,
     search,
-    singleProductTwo
+    singleProductTwo,
+    checkOut,
+    showStore
 }
