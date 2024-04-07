@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 const path = require('path');
+const helpers = require('./utils/helpers');
 const hbs = require('hbs');
 const productRouter = require('./routes/product');
 const authRouter = require('./routes/auth');
@@ -12,14 +13,7 @@ const db = require('./utils/database');
 // const ProductImage = require('./models/productimages');
 
 const Users = [];
-
-hbs.registerHelper("getProductImage", function(product, options) {
-    if(product.ProductImages && product.ProductImages.length){
-        return `<img src="${product.ProductImages[0].url}" alt="${product.name}" />`
-    }
-    return '';
-
-});
+hbs.registerHelper(helpers);
 
 
 app.set('view engine', 'hbs');
