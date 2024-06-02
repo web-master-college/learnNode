@@ -36,7 +36,8 @@ const getProducts = (request , response) =>{
                     p.rating = getRandomRating();
                     return p;
                 })
-                response.render('products/all', {products: ratedProducts});
+                const username = request.session.user.userName;
+                response.render('products/all', {products: ratedProducts, username});
 
             }).catch(err =>{
                 response.render('404');   

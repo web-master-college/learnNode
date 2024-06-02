@@ -1,39 +1,57 @@
 {{>header showMenu='false' }}
 
 
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui teal image header">
-      <img src="https://semantic-ui.com/examples/assets/images/logo.png" class="image">
-      <div class="content">
-        Log-in to your account
-      </div>
-    </h2>
-    <form class="ui large form">
-      <div class="ui stacked segment">
+<div class="ui container" style="margin-top:100px;">
+  
+
+
+<div class="ui placeholder segment">
+  <div class="ui two column very relaxed stackable grid">
+    <div class="column">
+      
+      <form class="ui form" method="post" action="/login">
         <div class="field">
+          <label>email</label>
           <div class="ui left icon input">
+            <input type="text" name="email" placeholder="email">
             <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
           </div>
         </div>
         <div class="field">
+          <label>Password</label>
           <div class="ui left icon input">
+            <input type="password" name="password" placeholder="password">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Login</div>
+        <button class="ui blue submit button">Login</button>
+      </form>
+
+
+    </div>
+    <div class="middle aligned column">
+      <div class="ui big button">
+        <i class="signup icon"></i>
+        Sign Up
       </div>
-
-      <div class="ui error message"></div>
-
-    </form>
-
-    <div class="ui message">
-      New to us? <a href="#">Sign Up</a>
     </div>
   </div>
+  <div class="ui vertical divider">
+    Or
+  </div>
 </div>
+
+</div>
+
+{{#if error }}
+    <div class="ui warning message">
+  <i class="close icon"></i>
+  <div class="header">
+    An error occured
+  </div>
+      {{error}}
+</div>
+{{/if}}
+
 
 {{>footer}}

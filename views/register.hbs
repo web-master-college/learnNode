@@ -1,6 +1,6 @@
 {{>header}}
 
-<form class="ui form" method="POST" action="/new-user"> 
+<form class="ui form" method="POST" action="/register"> 
   <div class="field">
     <label>First Name</label>
     <input type="text" name="firstName" placeholder="First Name" />
@@ -19,5 +19,29 @@
   </div>
   <button class="ui button" type="submit">Submit</button>
 </form>
+
+
+{{#if error }}
+    <div class="ui warning message">
+  <i class="close icon"></i>
+  <div class="header">
+    An error occured
+  </div>
+      {{error}}
+</div>
+{{/if}}
+
+
+{{#if success }}
+<div class="ui info message">
+  <i class="close icon"></i>
+  <div class="header">
+    User Created!
+  </div>
+    {{success}}
+</div>
+{{/if}}
+
+
 
 {{>footer}}

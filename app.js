@@ -48,7 +48,12 @@ hbs.registerPartials(__dirname + '/views/partials');
 //     next();
 // })
 
+
+
+
 app.use(authRouter);
+
+
 app.use('/products', productRouter);
 
 app.get('/', (req, response) => {
@@ -58,9 +63,9 @@ app.get('/', (req, response) => {
     });
 });
 
-app.get('/register', (req, response) => {
-    response.render('register');
-});
+// app.get('/register', (req, response) => {
+//     response.render('register');
+// });
 
 // new data sent to user
 //  product/10
@@ -122,7 +127,7 @@ app.listen(PORT, async () =>{
             // await Product.sync();
 
             await db.authenticate();
-            sessionStore.sync()
+            sessionStore.sync();
             console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Succssfully connected to Databsae`));
         }catch(e){
             console.log(chalk.bgRedBright(`Server is running on Port ${PORT}, Could not connected to Databsae`));
