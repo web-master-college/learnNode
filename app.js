@@ -3,15 +3,32 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 const path = require('path');
-const helpers = require('./utils/helpers');
 const hbs = require('hbs');
 const productRouter = require('./routes/product');
 const authRouter = require('./routes/auth');
 const bodyParser = require('body-parser');
 const db = require('./utils/database');
 const helpers = require('./utils/helpers')
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 // const Product = require('./models/product');
 // const ProductImage = require('./models/productimages');
+
+var sessionStore = new SequelizeStore({
+    db: db,
+    checkExpirationInterval: 15 * 60 * 1000,
+    expiration: 7 * 24 * 60 * 60 * 1000
+ });
+
+
+ app.use(session({
+    secret: 'keyboard cat',
+    resave: false, 
+    saveUninitialized: false,
+    store: sessionStore
+  }));
+
+
 
 const Users = [];
 
@@ -105,6 +122,7 @@ app.listen(PORT, async () =>{
             // await Product.sync();
 
             await db.authenticate();
+            sessionStore.sync()
             console.log(chalk.bgYellowBright(`Server is running on Port ${PORT}, Succssfully connected to Databsae`));
         }catch(e){
             console.log(chalk.bgRedBright(`Server is running on Port ${PORT}, Could not connected to Databsae`));
