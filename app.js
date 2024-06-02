@@ -9,12 +9,13 @@ const productRouter = require('./routes/product');
 const authRouter = require('./routes/auth');
 const bodyParser = require('body-parser');
 const db = require('./utils/database');
+const helpers = require('./utils/helpers')
 // const Product = require('./models/product');
 // const ProductImage = require('./models/productimages');
 
 const Users = [];
-hbs.registerHelper(helpers);
 
+hbs.registerHelper(helpers);
 
 app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
